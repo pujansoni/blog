@@ -1,0 +1,11 @@
+<%= form_for([@current_user, @current_user.replies.build], local: true) do |user_reply| %>
+    <p>
+        <%= user_reply.label :message %><br>
+        <%= user_reply.text_area :message %>
+    </p>
+    <%= user_reply.hidden_field :replyable_id, value: :replyable_id %>
+    <%= user_reply.hidden_field :replyable_type, value: :replyable_type %>
+    <p>
+        <%= user_reply.submit "Submit" %>
+    </p>
+<% end %>

@@ -1,0 +1,13 @@
+<%= form_for([@user, @post, @post.comments.build], html: {remote: true}) do |post_comment| %>
+    <div class="error-color">
+        <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg %>
+        <% end %>
+    </div>
+    <div class="form-group">
+        <p>
+            <%= post_comment.text_area :text, class: 'form-control', placeholder: 'Enter comment' %>
+        </p>
+    </div>
+    <span class="pull-right"><%= post_comment.submit "Comment" %></span>
+<% end %>

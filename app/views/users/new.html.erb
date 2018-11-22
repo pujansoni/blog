@@ -1,0 +1,7 @@
+<% if logged_in? %>
+	<strong>You are already logged in :- </strong>
+	<%= link_to 'Your Profile', user_path(@current_user) %>
+<% else %>
+    <h1>Enter user details</h1>
+    <%= render 'form' %>
+<% end %>

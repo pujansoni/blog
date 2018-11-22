@@ -1,0 +1,33 @@
+<h2>Your Details
+    <%= link_to(raw('<span class="glyphicon glyphicon-list"></span> All Posts'), user_posts_path(@user), class: "btn btn-info pull-right") %>     
+    <%= link_to(raw('<span class="glyphicon glyphicon-plus"></span> Add Posts'), new_user_post_path(@user), class: "btn btn-info pull-right") %>
+</h2>
+<table class="table">
+    <tr>	
+        <td>Name</td>
+        <td><%= @user.user_name %></td>
+    </tr>
+    <tr>	
+        <td>Email</td>
+        <td><%= @user.email %></td>
+    </tr>
+    <tr>	
+        <td>Date Of Birth</td>
+        <td><%= @user.date_of_birth %></td>
+    </tr>
+    <tr>	
+        <td>Age</td>
+        <td><%= @user.age %></td>
+    </tr>
+    <tr>
+        <td>Contact Number</td>
+        <td><%= @user.contact_number %></td>
+    </tr>
+    <tr>
+        <td>Address</td>
+        <td><%= @user.address %></td>
+    </tr>
+</table>
+<p align="center">
+    <%= link_to(raw('<span class="glyphicon glyphicon-edit"></span> Edit User'), edit_user_path, class: "btn btn-primary") %>
+</p>

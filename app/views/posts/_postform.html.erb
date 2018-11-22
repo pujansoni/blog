@@ -1,0 +1,23 @@
+<%= form_for([@user, @post], remote: true) do |user_post| %>
+	<% if @post.errors.any? %>
+        <div class="error-color" id="error_explanation">
+            <h2>
+                <%= pluralize(@post.errors.count, "error") %>
+            </h2>
+            <ul>
+                <% @post.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+        <p>
+            <%= user_post.label :message %><br>
+            <%= user_post.text_area :message, class: 'form-control', placeholder: 'Message' %>
+        </p>
+    </div>
+
+	<%= user_post.submit "Post" %>
+<% end %>

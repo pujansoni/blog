@@ -1,0 +1,8 @@
+<% if comment.id.present? %>
+    <div id="comment_<%= comment.id %>">
+        <p>
+            <%= comment.text %>
+            <%= link_to 'Delete Comment', [@user, @post, comment], method: :delete, remote: true %>
+        </p>
+    </div>
+<% end %>

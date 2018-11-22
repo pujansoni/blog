@@ -1,0 +1,41 @@
+<div class="panel-group">
+    <h2>
+        <%= @user.user_name %>
+    </h2>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="font-p">Post: <%= @post.message %>
+                <%= link_to(raw('<span class="glyphicon glyphicon-edit"></span> Edit Post'), edit_user_post_path(@user,@post), class: "btn btn-info pull-right") %>
+                <%= link_to(raw('<span class="glyphicon glyphicon-list"></span> All Posts'), user_posts_path(@user), class: "btn btn-info pull-right") %>         
+            </div>
+        </div>
+        <div class="panel-body">
+            <p class="font-p1">Comments:</p>
+            <table class="table">
+                <tr>
+                    <td id='show_comments'>
+                        <%= render @post.comments %>
+                    </td>
+                </tr>
+            </table>
+            <div id='add_comment'>
+                <%= render 'addcomment', locals: { user: @user, post: @post } %>
+            </div>
+            <div id="add_delete_form">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id='show_post'>
+    <% @posts.each do |post|%>
+        <div class="post_delete_<%= post.id %>">
+            <div class="post_<%= post.id %>">
+                <%= render 'edittext', post: post %>
+            </div>
+            <% if post.id != @post.id %>
+                <%= link_to "delete", user_post_path(post.user_id, post.id), method: :delete, remote: true %>
+            <% end %>
+        </div>
+    <% end %>
+</div>

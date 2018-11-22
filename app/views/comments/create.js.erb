@@ -1,0 +1,3 @@
+$('#show_comments').append("<p><%= j render partial: @comment %></p>");
+$('#add_comment').empty().append("<%= j render partial: 'posts/addcomment', locals: { user: @user, post: @post } %>");
+// @comment.text 

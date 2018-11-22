@@ -1,0 +1,85 @@
+<%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation" style="color:red">
+            <h2>
+                <%= pluralize(@user.errors.count, "error") %>!
+            </h2>
+            <div class="container">
+                <ul class="list-group">
+                    <% @user.errors.full_messages.each do |msg| %>
+                        <li class="list-group-item"><%= msg %></li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+        <p>
+            <%= f.label :user_name %><br>
+            <%= f.text_field :user_name, class: 'form-control', placeholder: 'Enter username' %>
+        </p>
+    </div>
+
+    <div class="form-group">
+        <p>   
+            <%= f.label :email %><br>
+            <%= f.email_field :email, class: 'form-control', placeholder: 'Enter email' %>
+        </p>
+    </div>
+
+    <div class="form-group">
+        <p>
+            <%= f.label :date_of_birth %><br>
+            <%= f.date_field :date_of_birth, class: 'form-control', placeholder: 'Enter date of birth' %>
+        </p>
+    </div>  
+
+    <div class="form-group">
+        <p>
+            <%= f.label :contact_number %><br>
+            <%= f.telephone_field :contact_number, class: 'form-control', placeholder: 'Enter contact number' %>
+        </p>
+    </div>
+
+    <div class="form-group">
+        <p>
+            <%= f.label :address %><br>
+            <%= f.text_area :address, class: 'form-control', placeholder: 'Enter address' %>
+        </p>
+    </div>
+
+    <div class="form-group">
+        <p>
+            <%= f.label :password %><br>
+            <%= f.password_field :password, class: 'form-control', placeholder: 'Enter new password' %>
+        </p>
+    </div>
+
+    <div class="form-group">
+        <p>
+            <%= f.label :password_confirmation %><br>
+            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirm password' %>
+        </p>
+    </div>
+
+    <div class="form-group">
+        <%= select_tag(:category_id, options_from_collection_for_select(@categories, 'id', 'title'), {class: "btn mdown", include_blank: "Select Category"})%>
+        <% @categories.each do |category| %>
+            <div class="hide all_categories" data-category-id="<%= category.id %>">
+                <% category.subcategories.each do |subcategory| %>
+                    <p>
+                        <%= check_box_tag "user[subcategory_ids][]", subcategory.id, false, class: 'checkbox_acc' %>
+                        <%= label_tag(subcategory.id, subcategory.name) %>
+                    </p>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+
+    <p id="demo"></p>
+
+    <div class="form-group">
+        <%= f.submit 'Submit', class: 'btn btn-default' %>
+    </div>
+<% end %>

@@ -1,0 +1,42 @@
+<div class="panel-group" >
+    <h2><%= @user.user_name %> posts: 
+        <%= link_to(raw('<span class="glyphicon glyphicon-plus"></span> Add Post'), new_user_post_path(@user), class: "btn btn-info pull-right") %>
+    </h2>
+    <% @posts.each do |post| %>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="font-p">Post: <%= post.message %>
+                    <%= link_to(raw('<span class="glyphicon glyphicon-remove"></span> Delete Post'), user_post_path(@user,post), class: "btn btn-info pull-right", method: :delete, data: { confirm: 'Are you sure' } ) %>
+                    <%= link_to(raw('<span class="glyphicon glyphicon-edit"></span> Edit Post'), edit_user_post_path(@user,post), class: "btn btn-info pull-right") %>
+                    <%= link_to(raw('<span class="glyphicon glyphicon-arrow-right"></span> Show Post'), user_post_path(@user,post), class: "btn btn-info pull-right") %>         
+                </div>
+            </div>
+            <div class="panel-body">
+                <p class="font-p1">Comments:</p>
+                <ul>
+                    <% post.comments.each do |comment| %>
+                        <% if comment.id %>
+                            <li class="comment-height"><%= comment.text %>
+                                <%= link_to(raw('<span class="glyphicon glyphicon-remove"></span> Delete Comment'), [@user, post, comment], class: "btn btn-info pull-right btn-sm comment-height", method: :delete, data: { confirm: 'Are you sure' } ) %>
+                            </li>
+                        <% end %>
+                    <% end %>
+                </ul>
+
+                <%= form_for([@user, post, post.comments.build], local: true) do |post_comment| %>
+                    <div class="error-color">
+                        <% flash.each do |name, msg| %>
+                            <%= content_tag :div, msg %>
+                        <% end %>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <%= post_comment.text_area :text, class: 'form-control', placeholder: 'Enter comment' %>
+                        </p>
+                    </div>
+                    <span class="pull-right"><%= post_comment.submit "Comment" %></span>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+</div>

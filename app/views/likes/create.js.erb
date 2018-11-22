@@ -1,0 +1,10 @@
+<% if params[:likeable_type] == 'Post' %>
+	$('#post_<%= @post.id %>_likes').empty().append('<span id="post_<%= @post.id %>_likes" class="like-right-position"><%= pluralize(@post.likes.size, "like") %></span>');
+	$('#post_<%= @post.id %>_likes_likebtn').attr( 'data-like-id', "<%= @like.id %>" );
+	$('#post_<%= @post.id %>_likes_likebtn').removeAttr('disabled');
+<% else %>
+	$('#comment_<%= @comment.id %>_likes').empty().append('<span id="comment_<%= @comment.id %>_likes" class="like-right-position" ><%= pluralize(@comment.likes.size, "like") %></span>');
+	$('#comment_<%= @comment.id %>_likes_likebtn').attr( 'data-like-id', "<%= @like.id %>" );
+	$('#comment_<%= @comment.id %>_likes_likebtn').removeAttr('disabled');
+<% end %>
+
